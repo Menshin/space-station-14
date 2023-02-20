@@ -22,12 +22,17 @@ namespace Content.Server.Rotatable
             if (!args.CanAccess || !args.CanInteract || component.MirrorEntity == null)
                 return;
 
-            Verb verb = new();
-            verb.Act = () => TryFlip(component, args.User);
-            verb.Text = Loc.GetString("flippable-verb-get-data-text");
-            verb.DoContactInteraction = true;
-            // TODO VERB ICONS Add Uno reverse card style icon?
-            args.Verbs.Add(verb);
+            Verb flip = new()
+            {
+                Act = () => TryFlip(component, args.User),
+                Text = Loc.GetString("flippable-verb-get-data-text"),
+                DoContactInteraction = true,
+                IconTexture = "/Textures/Interface/VerbIcons/flip.svg.192dpi.png",
+                Category = VerbCategory.Rotate,
+                Priority = -3, // flip icon is last
+            };
+            args.Verbs.Add(flip);
+
         }
 
         private void AddRotateVerbs(EntityUid uid, RotatableComponent component, GetVerbsEvent<Verb> args)
