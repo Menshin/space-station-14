@@ -37,7 +37,7 @@ public sealed class AtmosAlarmableVisualsSystem : VisualizerSystem<AtmosAlarmabl
             foreach (var (setLayer, powerState) in component.SetOnDepowered)
             {
                 if (args.Sprite.LayerMapTryGet(setLayer, out int setStateLayer))
-                    args.Sprite.LayerSetState(setStateLayer, new RSI.StateId(powerState));
+                    args.Sprite.LayerSetState(setStateLayer, powerState);
             }
         }
 
@@ -46,7 +46,7 @@ public sealed class AtmosAlarmableVisualsSystem : VisualizerSystem<AtmosAlarmabl
             && powered
             && component.AlarmStates.TryGetValue(alarmType, out var state))
         {
-            args.Sprite.LayerSetState(layer, new RSI.StateId(state));
+            args.Sprite.LayerSetState(layer, state);
         }
     }
 }

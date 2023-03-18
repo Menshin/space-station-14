@@ -5,4 +5,8 @@ public sealed class AlertLevelDisplayComponent : Component
 {
     [DataField("alertVisuals")]
     public readonly Dictionary<string, string> AlertVisuals = new();
+
+    [DataField("alertLayer")]
+    public readonly string AlertDisplayLayer = String.Empty;
+
 }

@@ -22,25 +22,21 @@ public sealed class AlertLevelDisplaySystem : EntitySystem
             return;
         }
 
-        if (!args.Sprite.LayerMapTryGet(AlertLevelDisplay.Layer, out _))
-        {
-            var layer = args.Sprite.AddLayer(new RSI.StateId(component.AlertVisuals.Values.First()));
-            args.Sprite.LayerMapSet(AlertLevelDisplay.Layer, layer);
-        }
+        var layer = args.Sprite.LayerMapReserveBlank(component.AlertDisplayLayer);
 
         if (!args.AppearanceData.TryGetValue(AlertLevelDisplay.CurrentLevel, out var level))
         {
-            args.Sprite.LayerSetState(AlertLevelDisplay.Layer, new RSI.StateId(component.AlertVisuals.Values.First()));
+            args.Sprite.LayerSetState(layer, component.AlertVisuals.Values.First());
             return;
         }
 
         if (component.AlertVisuals.TryGetValue((string) level, out var visual))
         {
-            args.Sprite.LayerSetState(AlertLevelDisplay.Layer, new RSI.StateId(visual));
+            args.Sprite.LayerSetState(layer, visual);
         }
         else
         {
-            args.Sprite.LayerSetState(AlertLevelDisplay.Layer, new RSI.StateId(component.AlertVisuals.Values.First()));
+            args.Sprite.LayerSetState(layer, component.AlertVisuals.Values.First());
         }
     }
 }
