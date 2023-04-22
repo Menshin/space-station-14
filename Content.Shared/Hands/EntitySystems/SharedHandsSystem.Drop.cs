@@ -18,7 +18,7 @@ public abstract partial class SharedHandsSystem : EntitySystem
         {
             return;
         }
-        Logger.Debug($"HAND ENTITY REMOVAL : Handling entity {args.Entity} removal on {args.Container.ID} which is {hand}");
+
         var gotUnequipped = new GotUnequippedHandEvent(uid, args.Entity, hand);
         RaiseLocalEvent(args.Entity, gotUnequipped, false);
 

@@ -20,7 +20,6 @@ public abstract partial class SharedHandsSystem : EntitySystem
         {
             return;
         }
-        Logger.Debug($"HAND ENTITY INSERTED : Handling entity {args.Entity} removal on {args.Container.ID} which is {hand}");
 
         var didEquip = new DidEquipHandEvent(uid, args.Entity, hand);
         RaiseLocalEvent(uid, didEquip, false);
